@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qual é a sua red flag?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg1:#140006;--bg2:#2a0010;--accent:#ff3055;--accent2:#ff9500;
+  --glass:rgba(255,255,255,0.06);--border:rgba(255,255,255,0.10);
+  --text:#fff0f2;--muted:rgba(255,240,242,0.55)
+}
+body{
+  font-family:'Inter',sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 50%,#1a000a 100%);
+  min-height:100vh;color:var(--text);display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:24px 16px;overflow-x:hidden;position:relative
+}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;animation:drift 8s ease-in-out infinite}
+.orb1{width:300px;height:300px;background:rgba(255,48,85,0.18);top:-80px;left:-80px;animation-delay:0s}
+.orb2{width:250px;height:250px;background:rgba(255,149,0,0.14);bottom:-60px;right:-60px;animation-delay:-4s}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,30px)}}
+.particle{position:fixed;width:4px;height:4px;border-radius:50%;background:var(--accent);opacity:0;pointer-events:none;animation:float-up linear infinite}
+@keyframes float-up{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:.4}90%{opacity:.2}100%{transform:translateY(-20px) scale(1);opacity:0}}
+
+main{position:relative;z-index:1;width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;gap:24px}
+
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-size:12px;color:var(--accent);font-weight:500;letter-spacing:.5px;text-transform:uppercase;backdrop-filter:blur(12px);animation:fadeDown .6s ease}
+.badge::before{content:'🚩';font-size:13px}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+
+h1{font-size:clamp(24px,6vw,36px);font-weight:700;text-align:center;line-height:1.2;letter-spacing:-.5px;background:linear-gradient(135deg,#fff0f2 0%,var(--accent) 60%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fadeUp .7s ease .1s both}
+.subtitle{font-size:15px;color:var(--muted);text-align:center;line-height:1.6;max-width:380px;animation:fadeUp .7s ease .2s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* ranking */
+.ranking{width:100%;display:flex;flex-direction:column;gap:10px;animation:fadeUp .7s ease .3s both}
+.rank-item{display:flex;align-items:center;gap:12px;background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:12px 14px;backdrop-filter:blur(12px)}
+.rank-num{font-size:18px;width:28px;text-align:center}
+.rank-text{font-size:13px;color:rgba(255,240,242,.85);flex:1}
+.rank-bar{height:4px;border-radius:100px;background:linear-gradient(90deg,var(--accent),var(--accent2));margin-top:4px}
+
+.card{width:100%;background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:24px;backdrop-filter:blur(16px);animation:fadeUp .7s ease .35s both}
+.checks{display:flex;flex-direction:column;gap:12px}
+.check-item{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,240,242,.8)}
+.check-icon{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px}
+
+.cta-btn{width:100%;padding:17px;border:none;border-radius:14px;background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);color:#fff;font-size:16px;font-weight:600;cursor:pointer;letter-spacing:.2px;position:relative;overflow:hidden;animation:fadeUp .7s ease .4s both, pulse 2.4s ease-in-out 1.2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,48,85,.4)}70%{box-shadow:0 0 0 14px rgba(255,48,85,0)}}
+
+.curiosity-bar{width:100%;background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:14px 16px;backdrop-filter:blur(12px);animation:fadeUp .7s ease .5s both}
+.curiosity-label{font-size:12px;color:var(--muted);margin-bottom:8px;display:flex;justify-content:space-between}
+.bar-track{height:6px;background:rgba(255,255,255,.08);border-radius:100px;overflow:hidden}
+.bar-fill{height:100%;width:0;border-radius:100px;background:linear-gradient(90deg,var(--accent),var(--accent2));animation:fill-bar 1.6s ease .8s forwards}
+@keyframes fill-bar{to{width:93%}}
+
+.counter{font-size:13px;color:var(--muted);text-align:center;animation:fadeUp .7s ease .6s both}
+.counter span{color:var(--accent);font-weight:600}
+
+.unlock{width:100%;background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:28px 24px;backdrop-filter:blur(16px);text-align:center;animation:fadeUp .7s ease .7s both}
+.unlock h2{font-size:20px;font-weight:700;margin-bottom:8px}
+.unlock p{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.5}
+.unlock-btn{display:block;width:100%;padding:15px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:15px;font-weight:600;text-decoration:none;border:none;cursor:pointer}
+
+footer{font-size:11px;color:rgba(255,255,255,.2);text-align:center;animation:fadeUp .7s ease .8s both}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<main>
+  <div class="badge">teste de personalidade</div>
+
+  <h1>Todo mundo tem uma red flag. A pergunta é: você sabe qual é a sua? 🚩</h1>
+
+  <p class="subtitle">Pode ser algo que você considera uma qualidade. Esse é o detalhe mais perturbador.</p>
+
+  <div class="ranking">
+    <div class="rank-item">
+      <div class="rank-num">🏆</div>
+      <div style="flex:1">
+        <div class="rank-text">Desaparece quando começa a gostar</div>
+        <div class="rank-bar" style="width:78%"></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted)">78%</div>
+    </div>
+    <div class="rank-item">
+      <div class="rank-num">🥈</div>
+      <div style="flex:1">
+        <div class="rank-text">Cria expectativas impossíveis</div>
+        <div class="rank-bar" style="width:64%"></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted)">64%</div>
+    </div>
+    <div class="rank-item">
+      <div class="rank-num">🥉</div>
+      <div style="flex:1">
+        <div class="rank-text">Testa pessoas sem perceber</div>
+        <div class="rank-bar" style="width:51%"></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted)">51%</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="checks">
+      <div class="check-item"><div class="check-icon">✓</div>Baseado em psicologia comportamental</div>
+      <div class="check-item"><div class="check-icon">✓</div>Resultado personalizado por tipo</div>
+      <div class="check-item"><div class="check-icon">✓</div>Compartilhável — manda pra quem você conhece</div>
+      <div class="check-item"><div class="check-icon">✓</div>Mais de 50 mil participantes</div>
+    </div>
+  </div>
+
+  <button class="cta-btn">Descobrir minha red flag 🚩</button>
+
+  <div class="curiosity-bar">
+    <div class="curiosity-label">
+      <span>Índice de curiosidade dos participantes</span>
+      <span id="pct">0%</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill"></div></div>
+  </div>
+
+  <p class="counter"><span id="live-count">11</span> pessoas descobriram sua red flag nos últimos 5 minutos</p>
+
+  <div class="unlock">
+    <h2>🚩 Ver minha análise completa</h2>
+    <p>Como sua red flag afasta pessoas, o que você faz quando sente vulnerabilidade e como parar de repetir os mesmos relacionamentos.</p>
+    <a href="[INSERIR LINK DE PAGAMENTO AQUI]" class="unlock-btn">Quero ver minha análise →</a>
+  </div>
+
+  <footer>Aviso: algumas pessoas preferem não descobrir a verdade.</footer>
+</main>
+
+<script>
+(function(){for(let i=0;i<10;i++){const p=document.createElement('div');p.className='particle';p.style.cssText=`left:${Math.random()*100}%;animation-duration:${6+Math.random()*8}s;animation-delay:${Math.random()*8}s;width:${2+Math.random()*4}px;height:${2+Math.random()*4}px`;document.body.appendChild(p)}})();
+let n=0;const pct=document.getElementById('pct');
+setTimeout(()=>{const t=setInterval(()=>{n++;pct.textContent=n+'%';if(n>=93)clearInterval(t)},16)},800);
+const el=document.getElementById('live-count');
+setInterval(()=>{el.textContent=Math.max(6,parseInt(el.textContent)+(Math.random()>.5?1:-1))},4500);
+</script>
+</body>
+</html>
