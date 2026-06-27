@@ -4,143 +4,163 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Qual é a sua red flag?</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg1:#140006;--bg2:#2a0010;--accent:#ff3055;--accent2:#ff9500;
-  --glass:rgba(255,255,255,0.06);--border:rgba(255,255,255,0.10);
-  --text:#fff0f2;--muted:rgba(255,240,242,0.55)
+  --bg:#1A0505;--surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);
+  --border:rgba(255,255,255,0.08);--border-hover:rgba(255,255,255,0.18);
+  --red:#DC2626;--orange:#EA580C;--rose:#FB7185;
+  --text:#FFF1F2;--muted:#FDA4AF;--dim:#6B7280;
 }
-body{
-  font-family:'Inter',sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 50%,#1a000a 100%);
-  min-height:100vh;color:var(--text);display:flex;flex-direction:column;align-items:center;
-  justify-content:center;padding:24px 16px;overflow-x:hidden;position:relative
-}
-.orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;animation:drift 8s ease-in-out infinite}
-.orb1{width:300px;height:300px;background:rgba(255,48,85,0.18);top:-80px;left:-80px;animation-delay:0s}
-.orb2{width:250px;height:250px;background:rgba(255,149,0,0.14);bottom:-60px;right:-60px;animation-delay:-4s}
-@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,30px)}}
-.particle{position:fixed;width:4px;height:4px;border-radius:50%;background:var(--accent);opacity:0;pointer-events:none;animation:float-up linear infinite}
-@keyframes float-up{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:.4}90%{opacity:.2}100%{transform:translateY(-20px) scale(1);opacity:0}}
-
-main{position:relative;z-index:1;width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;gap:24px}
-
-.badge{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-size:12px;color:var(--accent);font-weight:500;letter-spacing:.5px;text-transform:uppercase;backdrop-filter:blur(12px);animation:fadeDown .6s ease}
-.badge::before{content:'🚩';font-size:13px}
-@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
-
-h1{font-size:clamp(24px,6vw,36px);font-weight:700;text-align:center;line-height:1.2;letter-spacing:-.5px;background:linear-gradient(135deg,#fff0f2 0%,var(--accent) 60%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fadeUp .7s ease .1s both}
-.subtitle{font-size:15px;color:var(--muted);text-align:center;line-height:1.6;max-width:380px;animation:fadeUp .7s ease .2s both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-
-/* ranking */
-.ranking{width:100%;display:flex;flex-direction:column;gap:10px;animation:fadeUp .7s ease .3s both}
-.rank-item{display:flex;align-items:center;gap:12px;background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:12px 14px;backdrop-filter:blur(12px)}
-.rank-num{font-size:18px;width:28px;text-align:center}
-.rank-text{font-size:13px;color:rgba(255,240,242,.85);flex:1}
-.rank-bar{height:4px;border-radius:100px;background:linear-gradient(90deg,var(--accent),var(--accent2));margin-top:4px}
-
-.card{width:100%;background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:24px;backdrop-filter:blur(16px);animation:fadeUp .7s ease .35s both}
-.checks{display:flex;flex-direction:column;gap:12px}
-.check-item{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,240,242,.8)}
-.check-icon{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px}
-
-.cta-btn{width:100%;padding:17px;border:none;border-radius:14px;background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);color:#fff;font-size:16px;font-weight:600;cursor:pointer;letter-spacing:.2px;position:relative;overflow:hidden;animation:fadeUp .7s ease .4s both, pulse 2.4s ease-in-out 1.2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,48,85,.4)}70%{box-shadow:0 0 0 14px rgba(255,48,85,0)}}
-
-.curiosity-bar{width:100%;background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:14px 16px;backdrop-filter:blur(12px);animation:fadeUp .7s ease .5s both}
-.curiosity-label{font-size:12px;color:var(--muted);margin-bottom:8px;display:flex;justify-content:space-between}
-.bar-track{height:6px;background:rgba(255,255,255,.08);border-radius:100px;overflow:hidden}
-.bar-fill{height:100%;width:0;border-radius:100px;background:linear-gradient(90deg,var(--accent),var(--accent2));animation:fill-bar 1.6s ease .8s forwards}
-@keyframes fill-bar{to{width:93%}}
-
-.counter{font-size:13px;color:var(--muted);text-align:center;animation:fadeUp .7s ease .6s both}
-.counter span{color:var(--accent);font-weight:600}
-
-.unlock{width:100%;background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:28px 24px;backdrop-filter:blur(16px);text-align:center;animation:fadeUp .7s ease .7s both}
-.unlock h2{font-size:20px;font-weight:700;margin-bottom:8px}
-.unlock p{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.5}
-.unlock-btn{display:block;width:100%;padding:15px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:15px;font-weight:600;text-decoration:none;border:none;cursor:pointer}
-
-footer{font-size:11px;color:rgba(255,255,255,.2);text-align:center;animation:fadeUp .7s ease .8s both}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 50% at 20% 10%,rgba(220,38,38,.16) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 80% 90%,rgba(234,88,12,.12) 0%,transparent 60%)}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent)}
+.wrap{position:relative;z-index:1;width:100%;max-width:460px}
+.screen{display:none;flex-direction:column}
+.screen.active{display:flex;animation:up .45s cubic-bezier(.16,1,.3,1)}
+@keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+.prog-row{display:flex;align-items:center;gap:14px;margin-bottom:44px}
+.prog-track{flex:1;height:3px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange));border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px rgba(220,38,38,.5)}
+.prog-txt{font-size:12px;color:var(--dim);font-weight:500;flex-shrink:0}
+.q-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#FCA5A5;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:16px}
+.q-tag-dot{width:5px;height:5px;border-radius:50%;background:var(--red);animation:blink 1.8s ease infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.q-text{font-size:clamp(20px,5vw,26px);font-weight:700;color:var(--text);line-height:1.3;letter-spacing:-.4px;margin-bottom:32px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:18px 20px;font-size:15px;color:var(--muted);cursor:pointer;text-align:left;line-height:1.5;transition:all .2s cubic-bezier(.4,0,.2,1);-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden;backdrop-filter:blur(8px)}
+.opt::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(220,38,38,.08),rgba(234,88,12,.04));opacity:0;transition:opacity .2s;border-radius:inherit}
+.opt:hover{border-color:var(--border-hover);color:var(--text);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.opt:hover::before{opacity:1}
+.opt:active{transform:translateY(0);transition-duration:.08s}
+.opt.sel{background:linear-gradient(135deg,rgba(220,38,38,.2),rgba(234,88,12,.1));border-color:rgba(220,38,38,.5);color:var(--text);transform:translateY(-2px);box-shadow:0 8px 32px rgba(220,38,38,.2)}
+.opt.sel::after{content:'🚩';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:16px;animation:pop .25s cubic-bezier(.16,1,.3,1)}
+@keyframes pop{from{transform:translateY(-50%) scale(0)}to{transform:translateY(-50%) scale(1)}}
+#sl{align-items:center;justify-content:center;min-height:60vh;gap:22px}
+.spin{width:46px;height:46px;border:2px solid rgba(255,255,255,.06);border-top-color:var(--red);border-right-color:var(--orange);border-radius:50%;animation:spin .8s linear infinite;box-shadow:0 0 20px rgba(220,38,38,.3)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.dots{display:flex;gap:7px}
+.dots i{display:block;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.15);animation:dot .9s ease-in-out infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,80%,100%{transform:scale(.6);background:rgba(255,255,255,.15)}40%{transform:scale(1);background:var(--red)}}
+.ltxt{font-size:14px;color:var(--dim)}
+#sr{gap:14px}
+.r-hero{background:linear-gradient(135deg,rgba(220,38,38,.2) 0%,rgba(234,88,12,.15) 60%,rgba(251,113,133,.1) 100%);border:1px solid rgba(220,38,38,.25);border-radius:22px;padding:30px 26px;backdrop-filter:blur(16px);animation:up .45s cubic-bezier(.16,1,.3,1)}
+.r-eyebrow{font-size:11px;font-weight:600;color:#FCA5A5;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:12px}
+.r-name{font-size:clamp(28px,7vw,36px);font-weight:800;letter-spacing:-.8px;line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,#FFF1F2,#FCA5A5,#FDBA74);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.r-desc{font-size:15px;color:var(--muted);line-height:1.7}
+.r-pts{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:24px 22px;display:flex;flex-direction:column;gap:16px;backdrop-filter:blur(12px);animation:up .45s cubic-bezier(.16,1,.3,1) .08s both}
+.rp{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--muted);line-height:1.6}
+.rp-icon{width:24px;height:24px;border-radius:8px;flex-shrink:0;margin-top:1px;background:linear-gradient(135deg,rgba(220,38,38,.3),rgba(234,88,12,.2));border:1px solid rgba(220,38,38,.2);display:flex;align-items:center;justify-content:center;font-size:11px;color:#FCA5A5}
+.r-cta{background:var(--surface2);border:1px solid var(--border);border-radius:22px;padding:26px;backdrop-filter:blur(16px);animation:up .45s cubic-bezier(.16,1,.3,1) .16s both}
+.cta-tag{font-size:11px;font-weight:600;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.cta-h{font-size:20px;font-weight:700;letter-spacing:-.3px;margin-bottom:5px}
+.cta-s{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.55}
+.cta-checks{display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+.cta-check{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--muted)}
+.cta-check-dot{width:18px;height:18px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--red),var(--orange));display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700}
+.cta-btn{display:block;width:100%;padding:17px;background:linear-gradient(135deg,var(--red) 0%,var(--orange) 100%);border:none;border-radius:14px;font-size:15px;font-weight:700;color:#fff;cursor:pointer;text-decoration:none;text-align:center;font-family:inherit;letter-spacing:-.1px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;animation:pulse-btn 3s ease-in-out infinite}
+.cta-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent)}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(220,38,38,.4)}
+.cta-btn:active{transform:translateY(0)}
+@keyframes pulse-btn{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}50%{box-shadow:0 0 0 10px rgba(220,38,38,0)}}
+.cta-price{font-size:12px;color:var(--dim);text-align:center;margin-top:12px}
 </style>
 </head>
 <body>
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
+<div class="bg-glow"></div><div class="bg-grid"></div>
+<div class="wrap">
 
-<main>
-  <div class="badge">teste de personalidade</div>
-
-  <h1>Todo mundo tem uma red flag. A pergunta é: você sabe qual é a sua? 🚩</h1>
-
-  <p class="subtitle">Pode ser algo que você considera uma qualidade. Esse é o detalhe mais perturbador.</p>
-
-  <div class="ranking">
-    <div class="rank-item">
-      <div class="rank-num">🏆</div>
-      <div style="flex:1">
-        <div class="rank-text">Desaparece quando começa a gostar</div>
-        <div class="rank-bar" style="width:78%"></div>
-      </div>
-      <div style="font-size:12px;color:var(--muted)">78%</div>
-    </div>
-    <div class="rank-item">
-      <div class="rank-num">🥈</div>
-      <div style="flex:1">
-        <div class="rank-text">Cria expectativas impossíveis</div>
-        <div class="rank-bar" style="width:64%"></div>
-      </div>
-      <div style="font-size:12px;color:var(--muted)">64%</div>
-    </div>
-    <div class="rank-item">
-      <div class="rank-num">🥉</div>
-      <div style="flex:1">
-        <div class="rank-text">Testa pessoas sem perceber</div>
-        <div class="rank-bar" style="width:51%"></div>
-      </div>
-      <div style="font-size:12px;color:var(--muted)">51%</div>
-    </div>
+<div class="screen active" id="s1">
+  <div class="prog-row"><div class="prog-track"><div class="prog-fill" style="width:16%"></div></div><span class="prog-txt">1 / 6</span></div>
+  <div class="q-tag"><div class="q-tag-dot"></div>Pergunta 01</div>
+  <div class="q-text">Quando alguém que você gosta demora para responder, você geralmente:</div>
+  <div class="opts">
+    <div class="opt" onclick="pick(this,1,'A')">Fico tranquilo — cada um tem seu tempo.</div>
+    <div class="opt" onclick="pick(this,1,'B')">Releio a última conversa procurando onde errei.</div>
+    <div class="opt" onclick="pick(this,1,'C')">Me afasto antes de parecer que estou esperando.</div>
+    <div class="opt" onclick="pick(this,1,'D')">Mando outra mensagem "só para ver" se chegou.</div>
   </div>
+</div>
 
-  <div class="card">
-    <div class="checks">
-      <div class="check-item"><div class="check-icon">✓</div>Baseado em psicologia comportamental</div>
-      <div class="check-item"><div class="check-icon">✓</div>Resultado personalizado por tipo</div>
-      <div class="check-item"><div class="check-icon">✓</div>Compartilhável — manda pra quem você conhece</div>
-      <div class="check-item"><div class="check-icon">✓</div>Mais de 50 mil participantes</div>
-    </div>
+<div class="screen" id="s2">
+  <div class="prog-row"><div class="prog-track"><div class="prog-fill" style="width:33%"></div></div><span class="prog-txt">2 / 6</span></div>
+  <div class="q-tag"><div class="q-tag-dot"></div>Pergunta 02</div>
+  <div class="q-text">Quando alguém cancela um plano de última hora, você:</div>
+  <div class="opts">
+    <div class="opt" onclick="pick(this,2,'A')">Entendo — acontece com todo mundo.</div>
+    <div class="opt" onclick="pick(this,2,'B')">Digo que tudo bem, mas registro internamente.</div>
+    <div class="opt" onclick="pick(this,2,'C')">Cancelo na primeira oportunidade sem explicar.</div>
+    <div class="opt" onclick="pick(this,2,'D')">Fico irritado mas não falo nada no momento.</div>
   </div>
+</div>
 
-  <button class="cta-btn">Descobrir minha red flag 🚩</button>
-
-  <div class="curiosity-bar">
-    <div class="curiosity-label">
-      <span>Índice de curiosidade dos participantes</span>
-      <span id="pct">0%</span>
-    </div>
-    <div class="bar-track"><div class="bar-fill"></div></div>
+<div class="screen" id="s3">
+  <div class="prog-row"><div class="prog-track"><div class="prog-fill" style="width:50%"></div></div><span class="prog-txt">3 / 6</span></div>
+  <div class="q-tag"><div class="q-tag-dot"></div>Pergunta 03</div>
+  <div class="q-text">Em qual situação você mais se reconhece?</div>
+  <div class="opts">
+    <div class="opt" onclick="pick(this,3,'A')">Crio expectativas altas e fico desapontado quando a realidade não bate.</div>
+    <div class="opt" onclick="pick(this,3,'B')">Fico em silêncio esperando a pessoa perceber que errou.</div>
+    <div class="opt" onclick="pick(this,3,'C')">Testo as pessoas para ver o quanto me aguentam.</div>
+    <div class="opt" onclick="pick(this,3,'D')">Analiso tudo racionalmente e não entendo quem age pelo emocional.</div>
   </div>
+</div>
 
-  <p class="counter"><span id="live-count">11</span> pessoas descobriram sua red flag nos últimos 5 minutos</p>
-
-  <div class="unlock">
-    <h2>🚩 Ver minha análise completa</h2>
-    <p>Como sua red flag afasta pessoas, o que você faz quando sente vulnerabilidade e como parar de repetir os mesmos relacionamentos.</p>
-    <a href="[INSERIR LINK DE PAGAMENTO AQUI]" class="unlock-btn">Quero ver minha análise →</a>
+<div class="screen" id="s4">
+  <div class="prog-row"><div class="prog-track"><div class="prog-fill" style="width:66%"></div></div><span class="prog-txt">4 / 6</span></div>
+  <div class="q-tag"><div class="q-tag-dot"></div>Pergunta 04</div>
+  <div class="q-text">Quando você erra em um relacionamento, sua tendência é:</div>
+  <div class="opts">
+    <div class="opt" onclick="pick(this,4,'A')">Assumir na hora e tentar resolver.</div>
+    <div class="opt" onclick="pick(this,4,'B')">Defender meu ponto antes de admitir qualquer coisa.</div>
+    <div class="opt" onclick="pick(this,4,'C')">Entrar em loop de culpa e pedir desculpa por tudo.</div>
+    <div class="opt" onclick="pick(this,4,'D')">Analisar friamente se realmente errei antes de admitir.</div>
   </div>
+</div>
 
-  <footer>Aviso: algumas pessoas preferem não descobrir a verdade.</footer>
-</main>
+<div class="screen" id="s5">
+  <div class="prog-row"><div class="prog-track"><div class="prog-fill" style="width:83%"></div></div><span class="prog-txt">5 / 6</span></div>
+  <div class="q-tag"><div class="q-tag-dot"></div>Pergunta 05</div>
+  <div class="q-text">Qual dessas frases você já pensou sobre alguém que gostava?</div>
+  <div class="opts">
+    <div class="opt" onclick="pick(this,5,'A')">"Se me quisesse, teria priorizado."</div>
+    <div class="opt" onclick="pick(this,5,'B')">"Não vou falar nada. Vou esperar para ver até onde vai."</div>
+    <div class="opt" onclick="pick(this,5,'C')">"Eu sabia que ia terminar assim."</div>
+    <div class="opt" onclick="pick(this,5,'D')">"Não entendo como alguém age dessa forma."</div>
+  </div>
+</div>
+
+<div class="screen" id="s6">
+  <div class="prog-row"><div class="prog-track"><div class="prog-fill" style="width:100%"></div></div><span class="prog-txt">6 / 6</span></div>
+  <div class="q-tag"><div class="q-tag-dot"></div>Pergunta 06</div>
+  <div class="q-text">Como você age quando sente que está perdendo alguém?</div>
+  <div class="opts">
+    <div class="opt" onclick="pick(this,6,'A')">Me aproximo demais — e aí afasto de vez.</div>
+    <div class="opt" onclick="pick(this,6,'B')">Me distancio primeiro. Não vou ser o último a sair.</div>
+    <div class="opt" onclick="pick(this,6,'C')">Fico hipervigilante a cada detalhe do comportamento dela.</div>
+    <div class="opt" onclick="pick(this,6,'D')">Não faço nada. E depois me arrependo.</div>
+  </div>
+</div>
+
+<div class="screen" id="sl"><div class="spin"></div><div class="dots"><i></i><i></i><i></i></div><div class="ltxt">Identificando sua red flag...</div></div>
+<div class="screen" id="sr"></div>
+</div>
 
 <script>
-(function(){for(let i=0;i<10;i++){const p=document.createElement('div');p.className='particle';p.style.cssText=`left:${Math.random()*100}%;animation-duration:${6+Math.random()*8}s;animation-delay:${Math.random()*8}s;width:${2+Math.random()*4}px;height:${2+Math.random()*4}px`;document.body.appendChild(p)}})();
-let n=0;const pct=document.getElementById('pct');
-setTimeout(()=>{const t=setInterval(()=>{n++;pct.textContent=n+'%';if(n>=93)clearInterval(t)},16)},800);
-const el=document.getElementById('live-count');
-setInterval(()=>{el.textContent=Math.max(6,parseInt(el.textContent)+(Math.random()>.5?1:-1))},4500);
+const ans={};
+const P={
+  A:{name:'Expectativa Impossível 🚩',desc:'Você cria padrões tão altos que quase ninguém consegue atingi-los — e isso afasta pessoas antes que elas tenham chance de te surpreender. A sua red flag não é ser exigente, é não comunicar o que espera.',pts:['Você se decepciona com frequência, mas raramente diz o que queria.','Tende a romantizar antes de conhecer de verdade.','Quando alguém falha, você já tinha previsto — e usou isso para não se abrir.','O que faz você sair: a pessoa nunca saber exatamente o que você esperava dela.']},
+  B:{name:'Silêncio Punitivo 🚩',desc:'Você usa o silêncio como forma de punir — espera que a pessoa perceba o erro sozinha. Isso cria um jogo onde ninguém ganha: você acumula mágoa e o outro não entende o que aconteceu.',pts:['Você raramente diz diretamente o que te machucou.','A outra pessoa frequentemente não sabe o que fez de errado.','Você testa se a pessoa "realmente se importa" esperando que ela note.','O padrão que mais te machuca: guardar até não aguentar mais e explodir.']},
+  C:{name:'Sabotagem Antecipada 🚩',desc:'Você sai ou se afasta antes de ser machucado — mesmo quando tudo está indo bem. É uma proteção inconsciente que parece lógica, mas que destrói relacionamentos antes que eles comecem de verdade.',pts:['Quando algo parece bom demais, você espera o problema aparecer.','Você cria narrativas de término antes que haja motivo real.','Testa a pessoa para ter uma "prova" do que já acredita.','O que mais te trava: nunca saber como seria se tivesse ficado.']},
+  D:{name:'Frieza Emocional 🚩',desc:'Você processa tudo de forma racional e tem dificuldade de acessar e expressar o emocional. Para quem está do outro lado, isso parece distância, indiferença ou falta de interesse — mesmo quando não é.',pts:['Você raramente demonstra o quanto se importa, mesmo quando muito.','Conflitos emocionais te esgotam porque não sabe como navegar neles.','A pessoa ao seu lado frequentemente sente que não te conhece de verdade.','O padrão que afasta: a outra pessoa desistir de sentir que existe conexão.']}
+};
+function pick(el,q,opt){el.parentElement.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');ans[q]=opt;setTimeout(()=>go(q),400)}
+function go(q){document.getElementById('s'+q).classList.remove('active');if(q<6){document.getElementById('s'+(q+1)).classList.add('active')}else{document.getElementById('sl').classList.add('active');setTimeout(result,2200)}}
+function result(){const c={A:0,B:0,C:0,D:0};Object.values(ans).forEach(v=>c[v]++);const top=Object.entries(c).sort((a,b)=>b[1]-a[1])[0][0];const p=P[top];const icons=['◆','◈','◉','◇'];
+document.getElementById('sr').innerHTML=`<div class="r-hero"><div class="r-eyebrow">Sua red flag</div><div class="r-name">${p.name}</div><div class="r-desc">${p.desc}</div></div><div class="r-pts">${p.pts.map((pt,i)=>`<div class="rp"><div class="rp-icon">${icons[i]}</div><span>${pt}</span></div>`).join('')}</div><div class="r-cta"><div class="cta-tag">Análise completa</div><div class="cta-h">Sua análise completa está pronta</div><div class="cta-s">Como essa red flag afasta pessoas e o que fazer para mudar esse padrão agora.</div><div class="cta-checks"><div class="cta-check"><div class="cta-check-dot">✓</div>Análise psicológica completa</div><div class="cta-check"><div class="cta-check-dot">✓</div>Como sua red flag aparece na prática</div><div class="cta-check"><div class="cta-check-dot">✓</div>Plano para mudar o padrão</div><div class="cta-check"><div class="cta-check-dot">✓</div>Acesso imediato</div></div><a href="[INSERIR LINK DE PAGAMENTO AQUI]" class="cta-btn">Quero minha análise completa →</a><div class="cta-price">Acesso imediato · R$ 19,90</div></div>`;
+document.getElementById('sl').classList.remove('active');document.getElementById('sr').classList.add('active')}
 </script>
 </body>
 </html>
